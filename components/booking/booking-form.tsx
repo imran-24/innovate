@@ -5,22 +5,55 @@ import BookingInputs from './booking-inputs';
 import { Button } from '../ui/button';
 import { PlusCircle, X } from 'lucide-react';
 
+
+
 function BookingForm({value}: {value: number}) {
-  console.log(value)
-  const [inputs, setInputs] = useState(Array.from({ length: value }, () => '')); 
+
+  const [inputs, setInputs] = useState(Array.from({ length: value }, 
+    () =>  ({
+              from: '',
+              to: '',
+              depart: '',
+              return: '',
+            }) )); 
 
   useEffect(() => {
-    if(value === 3) setInputs(Array.from({ length: value }, () => ''));
-    else setInputs([''])
-  }, [value]);
+    if (value === 3) {
+        setInputs(prevInputs => [
+            ...prevInputs,
+            ...Array.from({ length: value - prevInputs.length }, () => ({
+                from: '',
+                to: '',
+                depart: '',
+                return: '',
+            }))
+        ]);
+    } else {
+        const filteredInputs = inputs.filter(input => input.from || input.to || input.depart);
+
+        if (filteredInputs.length > 0) {
+            setInputs([filteredInputs[0]]);
+        } else {
+            setInputs([{ from: '', to: '', depart: '', return: '' }]);
+        }
+    }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [value]);
+
 
   const handleAddInput = () => {
-    setInputs([...inputs, '']);
+    setInputs([...inputs, 
+      {
+        from: '',
+        to: '',
+        depart: '',
+        return: '',
+      }]);
   };
 
-  const handleInputChange = (index: any, value: any) => {
+  const handleInputChange = (index: any,type: 'from' | 'to' | 'depart' | 'return' , value: any) => {
     const newInputs = [...inputs];
-    newInputs[index] = value;
+    newInputs[index][type] = value;
     setInputs(newInputs);
   };
 
@@ -53,7 +86,10 @@ function BookingForm({value}: {value: number}) {
             </div>}
             {inputs.map((input, index) => (
                 <div key={index} className='flex items-center space-x-3'>
-                    <BookingInputs/>
+                    <BookingInputs
+                    type={value}
+                    onValueChange={(type, value)=> handleInputChange(index, type, value)}
+                    data={input}/>
                     {inputs.length > 2 &&
                     <Button
                     type='button'

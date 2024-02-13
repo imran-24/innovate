@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils"
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string,
-    
+    curve?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, label, ...props }, ref) => {
+  ({ className, type, curve, label, ...props }, ref) => {
     return (
       <div className="relative w-full overflow-hidden">
          <input
@@ -55,10 +55,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           peer-focus:text-xs">
           {label}
           </label>}
-        <div className={cn("h-8 w-8 peer-focus:hidden z-10 bg-white peer-hover:border-neutral-400  rounded-full border  absolute top-2",
+        {curve && 
+          <div className={cn("h-8 w-8  z-10 bg-white peer-hover:border-neutral-400  rounded-full border  absolute top-2",
           label === "From" && "-right-4",
           label === "To" && "-left-4",
-          )}/>
+          )}/>}
         </div>
     )
   }

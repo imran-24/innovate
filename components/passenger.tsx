@@ -6,9 +6,9 @@ import {
     PopoverContent,
     PopoverTrigger,
   } from "@/components/ui/popover"
-import { Button } from '../ui/button';
 import { ChevronDown, Minus, Plus } from 'lucide-react';
 import { useMediaQuery } from 'usehooks-ts';
+import { Button } from './ui/button';
 
   
 const Passenger = () => {
