@@ -6,11 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-import { ScrollArea } from "./ui/scroll-area"
 import InputDetailsContent from "./input-details-content";
-import { Input } from "./ui/input";
-import { useByValue } from "@/hooks/uselistings";
-import { useListingStore } from "@/hooks/use-listing-store";
 
 interface InputDetailsProps{
     children: React.ReactNode,
@@ -33,9 +29,6 @@ const popularCities = [
     "Pabna"]
 
 const InputDetails = ({children, align, label, value, isMobile}: InputDetailsProps) => {
-  // const {getByValue} = await useListings();
-  // const {data} = useListingStore();
-
   
   return (
     <Popover>
@@ -51,8 +44,8 @@ const InputDetails = ({children, align, label, value, isMobile}: InputDetailsPro
     //   translate="yes"
       sideOffset={-74}
       alignOffset={!isMobile ? -25 : 0}
-      className="w-full lg:w-[580px] p-0 py-6">
-        <div className="grid w-full space-y-4">
+      className="w-[580px]  py-6">
+        
             {/* <div className="w-full overflow-hidden group px-6 relative ">
                 <Input
                 label={label}
@@ -82,8 +75,8 @@ const InputDetails = ({children, align, label, value, isMobile}: InputDetailsPro
                 </div>
               </div>*/}
             
-            {/* <InputDetailsContent data={data} /> */}
-        </div>
+            <InputDetailsContent />
+        
       </PopoverContent>
     </Popover>
   )

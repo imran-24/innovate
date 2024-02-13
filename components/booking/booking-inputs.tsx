@@ -32,7 +32,10 @@ const BookingInputs = (
                 <InputDetails
                 isMobile
                 label="From"
-                align='start'>
+                align='start'
+                value={data?.from}
+                onChange={(value) => onValueChange('from', value)}
+                >
                     <Input 
                     label="From" 
                     curve
@@ -50,7 +53,9 @@ const BookingInputs = (
                 <InputDetails
                 label='To'
                 isMobile
-                align='end'>
+                align='end'
+                value={data?.to}
+                onChange={(value) => onValueChange('to', value)}>
                     <Input  
                     label="To" 
                     curve
