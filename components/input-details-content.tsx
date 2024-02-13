@@ -4,33 +4,21 @@ import WindowedSelect, { components, createFilter } from 'react-windowed-select'
 import React from "react";
 import { useListingStore } from '@/hooks/use-listing-store';
 
-// export type ListingType = {
-//   code: string,
-//   airport_name: string,
-//   city_name: string,
-//   city_code: string,
-//   country_name: string,
-//   search_contents:'string'}
 
-
-// interface InputDetailsContentProps{
-//   value?: any,
-//   onChange?: (value: any) => void;
-// }
 
 const customFilter = createFilter({ ignoreAccents: false });
 const customComponents = {
   ClearIndicator: (props: any) => <components.ClearIndicator {...props}>clear</components.ClearIndicator>
 };
 
-const InputDetailsContent = () => {
+const InputDetailsContent = ({label}: {label: string}) => {
 
   const {data} = useListingStore()
   return (
     <div>
         <WindowedSelect
             windowThreshold={200}
-            placeholder='From'
+            placeholder={label}
             isClearable
             options={data}
             components={customComponents}

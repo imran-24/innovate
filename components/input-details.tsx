@@ -75,8 +75,7 @@ const InputDetails = ({children, align, label, value, isMobile}: InputDetailsPro
                 </div>
               </div>*/}
             
-            <InputDetailsContent />
-        
+            <InputDetailsContent label={label} />
       </PopoverContent>
     </Popover>
   )
